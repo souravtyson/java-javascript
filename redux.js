@@ -1,5 +1,6 @@
-import redux from 'redux';
-const createStore = redux.createStore();
+const redux = require('redux');
+const createstore = redux.createStore;
+const combineReducers = redux.combineReducers;
 
 //actions
 const CAKE_ORDERED = 'CAKE_ORDERED';
@@ -29,13 +30,19 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const store = createStore(reducer);
-console.log(`Initial state ${store.getState()}`);
-
-const unsubscribe = store.subscribe(() => {
-  console.log(`Update State ${store.getState()}`);
+const rootReducer = combineReducers({
+  reducerone: reducer,
 });
 
+const store = createstore(rootReducer);
+console.log('Initial state ', store.getState());
+
+const unsubscribe = store.subscribe(() => {
+  console.log('Update State ', store.getState());
+});
+
+store.dispatch(orderCake());
+store.dispatch(orderCake());
 store.dispatch(orderCake());
 
 unsubscribe();
