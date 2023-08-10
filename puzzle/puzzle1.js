@@ -19,10 +19,34 @@ let listNode4 = new ListNode(2, listNode3);
 let listNode5 = new ListNode(1, listNode4);
 
 function printLinkedList(listNode) {
-  while (listNode.next != null) {
+  while (listNode != null) {
     console.log(listNode.value);
-    printLinkedList(listNode.next);
+    listNode = listNode.next;
   }
 }
 
 // printLinkedList(listNode5);
+
+// 1 -> 2 -> 3 -> 4 -> 5
+function reverseLinkedList(node) {
+  let prev = null;
+  let current = node;
+  let next = null;
+  while (current != null) {
+    console.log('*******');
+    // console.log(current);
+    next = current.next;
+    console.log(`backup - ${current.next}`);
+    current.next = prev;
+    console.log(`prev - ${prev}`);
+    prev = current;
+    console.log(`current - ${current}`);
+    current = next;
+    console.log(`next - ${next}`);
+  }
+  return prev;
+}
+
+let reversed = reverseLinkedList(listNode5);
+
+// printLinkedList(reversed);
