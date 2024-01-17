@@ -36,3 +36,10 @@ str = '({()})( ';
 console.log(isBalanced(str));
 str = '{(})[] ';
 console.log(isBalanced(str));
+console.log(isBalanced('{[()]}')); // Should return true
+console.log(isBalanced('{[(])}')); // Should return false
+console.log(isBalanced('({[]})')); // Should return true
+console.log(isBalanced('')); // Should return true, as an empty string is balanced
+console.log(isBalanced('{')); // Should return false, as there's an unmatched opening bracket
+console.log(isBalanced(')')); // Should return false, as there's an unmatched closing bracket
+console.log(isBalanced('abc')); // Should return true, as non-bracket characters are ignored
