@@ -7,9 +7,30 @@ findSubstrings('hello'); // Should return ['h', 'he', 'hel', 'hell', 'hello', 'e
 
 */
 
+// my solution
+/*
 function findSubstrings(str) {
-    // Your code goes here
-  
-  
+    const substr = []
+    for(let i = 0; i < str.length; i++) {
+        for (let k = i; k < str.length; k++) {
+            substr.push(str.substring(i, k + 1))
+        }
+    }
+    return substr
 }
+*/
+
+// recommended solution 
+function findSubstrings(str) {
+    const substr = [];
+    for (let i = 0; i < str.length; i++) {
+        for (let k = i; k < str.length; k++) {
+            substr.push(str.slice(i, k + 1));
+        }
+    }
+    return substr;
+}
+
   
+console.log(findSubstrings('abc'))
+console.log(findSubstrings('hello'))
