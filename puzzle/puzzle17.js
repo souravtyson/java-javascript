@@ -8,6 +8,42 @@ sortByStringLength(['dog', 'cat', 'elephant', 'lion']); // Should return ['cat',
 
 */
 
+/*
+
+earlier solution
+
+export const sortByStringLength = (strings) => {
+    if (strings.length <= 1) {
+      return strings;
+    }
+  
+    const middle = Math.floor(strings.length / 2);
+    const left = strings.slice(0, middle);
+    const right = strings.slice(middle);
+  
+    return merge(sortByStringLength(left), sortByStringLength(right));
+  }
+  
+  function merge(left, right) {
+    let result = [];
+    let leftIndex = 0;
+    let rightIndex = 0;
+  
+    while (leftIndex < left.length && rightIndex < right.length) {
+      if (left[leftIndex].length < right[rightIndex].length) {
+        result.push(left[leftIndex]);
+        leftIndex++;
+      } else {
+        result.push(right[rightIndex]);
+        rightIndex++;
+      }
+    }
+  
+    return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+  }
+*/
+
+
 function sortByStringLength(strings) {
     return strings.sort((s1, s2) => s1.length - s2.length)
 }
