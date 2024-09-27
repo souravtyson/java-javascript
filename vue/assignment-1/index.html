@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>This is assignment 1</title>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>{{message}}</p>
+            <button @click="updateValue">Click Me</button>
+        </div>
+        <script>
+            const { createApp } = Vue;
+            createApp({
+                data(){
+                    return {
+                        message: "Hello, Sourav!"
+                    }
+                },
+                methods: {
+                    updateValue() {
+                        this.message = "How are you?"
+                    }
+                }
+            }).mount('#app')
+        </script>
+    </body>
+</html>
