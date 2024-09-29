@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>This is assignement 2</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <section>
+            <h4>This is options api counter example</h4>
+            <options-counter></options-counter>
+        </section>
+        <section>
+            <h4>This is composition api counter example</h4>
+            <composition-counter></composition-counter>        
+        </section>
+    </div>
+    <script>
+        const {createApp, ref} = Vue
+        createApp({
+            components: {
+                'options-counter': {
+                    template: `
+                        <h3>{{optionsApiCounter}}</h3>
+                        <button @click="updateOptionsCounter" aria-label="Increment Options API Counter">Options API Counter</button>
+                    `,
+                    data() {
+                        return {
+                            optionsApiCounter: 0
+                        }
+                    },
+                    methods: {
+                        updateOptionsCounter() {
+                            this.optionsApiCounter++
+                        }
+                    }
+                },
+                'composition-counter': {
+                    template: `
+                        <h3>{{compositionApiCounter}}</h3>
+                        <button @click="updateCompositionCounter" aria-label="Increment Composition API Counter">Composition API Counter</button>
+                    `,
+                    setup() {
+                        const compositionApiCounter = ref(0)
+                        const updateCompositionCounter = () => {
+                            compositionApiCounter.value++
+                        }
+                        return {
+                            compositionApiCounter,
+                            updateCompositionCounter
+                        }
+                    }
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>

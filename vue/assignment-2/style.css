@@ -1,0 +1,12 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px;
+}
+section{
+    margin-bottom: 30px;
+}
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
