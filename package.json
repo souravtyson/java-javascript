@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "node-fetch": "^3.3.1",
+    "pdfcrowd": "^6.2.1",
+    "puppeteer": "^23.5.3",
     "redux": "^4.2.1"
   }
 }
