@@ -43,17 +43,19 @@
 
 
 // Function to filter products with discount calculation
-function getFilteredProducts(products, minPrice, maxPrice, category, sortBy) {
+function getFilteredProducts2(products, minPrice, maxPrice, category, sortBy) {
+    // console.log(JSON.stringify(products))
+    
     if (!products.length) {
       return products;
     }
-  
+    let prodCopy = JSON.parse(JSON.stringify(products))
     if (category) {
-      products = products.filter((prod) => prod.category === category);
+      prodCopy = prodCopy.filter((prod) => prod.category === category);
     }
   
     let filterProductByPrice = [];
-    filterProductByPrice = products
+    filterProductByPrice = prodCopy
       .filter((prod) => {
         if (prod.discount) {
           const finalPrice = prod.price - prod.discount;
@@ -67,19 +69,53 @@ function getFilteredProducts(products, minPrice, maxPrice, category, sortBy) {
         }
         return prod;
       });
-  
+      let x = []
     if (sortBy && sortBy === "price") {
-      return filterProductByPrice.sort((p1, p2) =>
+      x = filterProductByPrice.sort((p1, p2) =>
         p1.price < p2.price ? -1 : p1.price > p2.price ? 1 : 0
       );
     } else if (sortBy && sortBy === "name") {
-      return filterProductByPrice.sort((p1, p2) =>
+      x = filterProductByPrice.sort((p1, p2) =>
         p1.name < p2.name ? 1 : p1.name > p2.name ? -1 : 0
       );
     } else {
-      return filterProductByPrice;
+      x = filterProductByPrice;
     }
+    // console.log(x)
+    return x;
+}
+
+// better approach 
+
+function getFilteredProducts(products, minPrice, maxPrice, category, sortBy) {
+  if (!Array.isArray(products) || products.length === 0) {
+    return [];
   }
+
+  return products
+    // Filter by category if provided
+    .filter((prod) => (category ? prod.category === category : true))
+    // Apply discount and filter by price range
+    .map((prod) => {
+      const discountedProduct = { ...prod }; // Create a shallow copy to avoid mutating the original
+      if (discountedProduct.discount) {
+        discountedProduct.price = parseFloat((discountedProduct.price - discountedProduct.discount).toFixed(2));
+        delete discountedProduct.discount; // Remove discount after applying
+      }
+      return discountedProduct;
+    })
+    .filter((prod) => prod.price > minPrice && prod.price < maxPrice)
+    // Sort based on sortBy parameter
+    .sort((a, b) => {
+      if (sortBy === "price") {
+        return a.price - b.price; // Ascending order
+      }
+      if (sortBy === "name") {
+        return a.name.localeCompare(b.name); // Alphabetical order
+      }
+      return 0; // No sorting
+    });
+}
   
   // Test runner to check if actual output matches expected output
   function runTest(testName, actualOutput, expectedOutput) {
