@@ -20,3 +20,57 @@ Example - @CacheEvict(value= "incident", key= "#profile.id")
 @Cacheable - use this to get the cached value from the local cache.
 
 Note - You have to annotate the main class with @EnableCache annotation
+
+3. Can you explain the concept of a functional interface in Java?
+
+Answer -  A functional interface is also known as SAM Interface i.e Single Abstract Method Inerface. This interface is an interface with only one abstract method and any number of static or default methods. You can use @FunctionalInterface annotation to make the interface Functional Interface. Few example for this is Comparator Interface, Runnable interface, ActionListener.
+
+@FunctionalInterface
+interface CalculateSum {
+   abstract int sum(int a, int b);
+}
+
+
+public class Practice2 {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+
+        CalculateSum x = (a, b) -> a + b;
+
+        System.out.println(x.sum(1,2));
+    }
+ }
+
+
+import java.util.Arrays;
+import java.util.List;
+
+@FunctionalInterface
+interface CalculateSum {
+   abstract int sum(int a, int b);
+}
+
+
+public class Practice3 {
+    public static void main(String[] args) {
+        List<Integer> list = Arrays.asList(1,2,3,4,5);
+    }
+}
+
+4. Why is Comparable interface not considered FunctionalInterface?
+Ans - Single abstract method: Comparable only has one abstract method, compareTo, which aligns with the definition of a functional interface. 
+But - 
+No @FunctionalInterface annotation:
+Despite having a single abstract method, Java designers chose not to mark Comparable with @FunctionalInterface as it's not considered semantically appropriate to use lambdas directly with it.
+Class-level implementation:
+The common practice is to implement Comparable within a class that already has state, making it more natural to define comparison logic based on the object's internal data. 
+
+in layman word - 
+The primary purpose of the Comparable interface is to define a natural ordering for objects of a specific type. It establishes a contract for classes to provide a comparison mechanism that becomes intrinsic to their behavior. The implementation of Comparable is usually tied to the core functionality of a class, meaning it requires intimate knowledge of the class’s internal state. Allowing lambdas with Comparable would not align well with this intrinsic role because lambdas are often used for lightweight, ad hoc behavior rather than defining a natural order for a class. Adding @FunctionalInterface to Comparable could lead to ambiguities or confusion when dealing with lambda expressions. For instance, lambdas are better suited for interfaces like Runnable or Comparator, which are intended for use cases where an external behavior is needed, not for internal class behavior like Comparable.
+
+So the class implementing comparable interface will have to do changes in itself to override the compateTo method. This intrinsic change in the class behaviour is not recommended in case of functional interface.
+
+
+5. Explain changes in date and time api in java 8.
+
+6. 
