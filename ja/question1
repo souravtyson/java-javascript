@@ -1,0 +1,3 @@
+Question - Can you explain the concept of a functional interface in Java?
+
+Answer -  A functional interface is also known as SAM Interface i.e Single Abstract Method Inerface. This interface is an interface with only one abstract method and any number of static or default methods. You can use @FunctionalInterface annotation to make the interface Functional Interface. Few example for this is Comparable, Runnable interface, ActionListener.
