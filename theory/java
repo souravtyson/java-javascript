@@ -1,0 +1,22 @@
+1. Can you explain how you would implement a RESTful service using Spring Boot, including the key components and considerations involved?
+
+Ans - To implement RESTful service in spring boot you need to import dependency for spring-boot-starter-web. Then you have to create a controller class annotated by @RestController. Then based on the http method type you have to create a method annotated by the respective method annotater For example @PostMapping/@GetMapping e.t.c. You can further use @Valid & @RequestBody annotation to validate request body. You can also use @RestControllerAdvice annotation for handling each type of exception.
+
+
+2. Have you used caching in your Spring Boot applications? If so, explain how you implemented it and what types of caching mechanisms are available.
+Ans - Spring boot has application level caching option available using @CachePut, @CacheEvict, @Cacheable annotation which is part of spring-context library. 
+
+@CachePut - use this annotation on the method to save the value in local application cache. 
+Example - @CachePut(value= "incident", key= "#profile.id")
+          public Incident saveIncident(Incident profile) { return profile;}
+
+          so here whenever saveIncident is called it will save Incident based on the id value in the Incident object.
+
+@CacheEvict - use this annotation to evict some cache key.
+Example - @CacheEvict(value= "incident", key= "#profile.id")
+
+        it will evict key and value from local cache
+
+@Cacheable - use this to get the cached value from the local cache.
+
+Note - You have to annotate the main class with @EnableCache annotation
